@@ -6,7 +6,7 @@ namespace NSGE.Infrastructure.Repositories.Interfaces
 {
     public interface IEventoRepository
     {
-        public Task<IList<EventoGrid>> ListarEventos();
+        public Task<IList<EventoGrid>> ListarEventos(int? page, int? pageSize);
         public Task<IList<EventoGrid>> Filtrar(EventoGrid model);
         public Evento CarregarOS(string numeroDaOS);
         public Evento RetornarEvento(string idEvento);

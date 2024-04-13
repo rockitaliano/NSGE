@@ -12,7 +12,7 @@ namespace NSGE.Domain.Dtos.Evento
         }
         public string? NumeroDaOs { get; set; }
         public string? NomeEvento { get; set; }
-        public string? NomeCliente { get; set; }
+        public string? Nome { get; set; }
         public DateTime? DataEvento { get; set; }
         public string? Endereco { get; set; }
 

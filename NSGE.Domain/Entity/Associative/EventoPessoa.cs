@@ -2,6 +2,7 @@
 using NSGE.CrosCutting.Enum;
 using NSGE.Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace NSGE.Domain.Entity.Associative
 {
@@ -11,13 +12,15 @@ namespace NSGE.Domain.Entity.Associative
         public string PessoaId { get; set; }
 
         public string Tipo { get; set; }
-        public TipoFuncaoPessoaEnum? tipoEnum { get; set; }
+
+        [JsonProperty("TipoEnum")]
+        public TipoFuncaoPessoaEnum? tipoFuncaoEnum { get; set; }
 
         public TipoFuncaoPessoaEnum TipoEnum
         {
             get
             {
-                return EnumExtensions.GetEnumValue(tipoEnum);
+                return EnumExtensions.GetEnumValue(tipoFuncaoEnum);
             }
         }
 

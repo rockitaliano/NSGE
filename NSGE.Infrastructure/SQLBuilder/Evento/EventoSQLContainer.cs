@@ -13,10 +13,16 @@
 
         public string GetTodosEventos()
         {
-            return @"SELECT E.Id, E.NumeroDaOS, E.Nome as NomeEvento, P.Nome as NomeCliente, E.InicioDoEvento as DataEvento FROM evento E
-                    LEFT JOIN pessoa P on P.Id = E.IdDoCliente
-                    Limit 200
-                   ";
+            return @"SELECT E.Id, E.NumeroDaOS, E.Nome as NomeEvento, P.Nome as Nome, E.InicioDoEvento as DataEvento 
+                    FROM evento E
+                    LEFT JOIN pessoa P ON P.Id = E.IdDoCliente
+                    ORDER BY E.Id -- ou outra coluna que você deseja ordenar
+                    LIMIT @PageSize OFFSET @Offset;";
+            //return @"SELECT E.Id, E.NumeroDaOS, E.Nome as NomeEvento, P.Nome as Nome, E.InicioDoEvento as DataEvento FROM evento E
+            //        LEFT JOIN pessoa P on P.Id = E.IdDoCliente
+            //        ORDER BY @Offset ROWS 
+            //        FETCH NEXT @PageSize ROWS ONLY
+            //       ";
         }
 
         public string GetOs()

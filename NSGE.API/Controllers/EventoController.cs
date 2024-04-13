@@ -25,11 +25,11 @@ namespace NSGE.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<EventoGrid>> Index()
+        public async Task<ActionResult<EventoGrid>> Index(int? page = 1, int pageSize = 15)
         {
             try
             {
-                var evento = await _eventoService.ListarEventos();
+                var evento = await _eventoService.ListarEventos(page, pageSize);
                 if (evento == null)
                 {
                     return NotFound();

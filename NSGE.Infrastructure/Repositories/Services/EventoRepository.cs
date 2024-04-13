@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using NSGE.Domain.Dtos.Evento;
 using NSGE.Domain.Entity.Associative;
 using NSGE.Domain.Models;
@@ -19,13 +20,14 @@ namespace NSGE.Infrastructure.Repositories.ImplementRepository
             _context = context;
         }
 
-        public async Task<IList<EventoGrid>> ListarEventos()
+        public async Task<IList<EventoGrid>> ListarEventos(int? page, int? pageSize)
         {
             var query = _container.GetTodosEventos();
+            var offset = (page - 1) * pageSize;
 
             using (var connection = _context.CreateConnection())
             {
-                var result = await connection.QueryAsync<EventoGrid>(query);
+                var result = await connection.QueryAsync<EventoGrid>(query, new { Offset = offset, PageSize = pageSize });
                 return result.ToList();
             }
         }
@@ -47,10 +49,10 @@ namespace NSGE.Infrastructure.Repositories.ImplementRepository
                 parameters.Add("@nomeEvento", $"%{model.NomeEvento}%", DbType.String);
             }
 
-            if (!string.IsNullOrEmpty(model.NomeCliente))
+            if (!string.IsNullOrEmpty(model.Nome))
             {
                 sql += " AND P.Nome LIKE @nomeCliente";
-                parameters.Add("@nomeCliente", $"%{model.NomeCliente}%", DbType.String);
+                parameters.Add("@nomeCliente", $"%{model.Nome}%", DbType.String);
             }
             if (model.DataEvento != null)
             {

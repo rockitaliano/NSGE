@@ -66,9 +66,9 @@ namespace NSGE.Services.Services
             return await _repository.Filtrar(model);
         }
 
-        public async Task<IList<EventoGrid>> ListarEventos()
+        public async Task<IList<EventoGrid>> ListarEventos(int? page, int? pageSize)
         {
-            return await _repository.ListarEventos();
+            return await _repository.ListarEventos(page, pageSize);
         }
 
         public async Task<Evento> Load(string id, bool carregarAgenda)

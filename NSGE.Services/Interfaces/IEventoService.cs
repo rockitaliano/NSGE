@@ -5,7 +5,7 @@ namespace NSGE.Services.Interfaces
 {
     public interface IEventoService
     {
-        public Task<IList<EventoGrid>> ListarEventos();
+        public Task<IList<EventoGrid>> ListarEventos(int? page, int? pageSize);
         public Task<IList<EventoGrid>> Filtrar(EventoGrid model);
         public Evento CarregarOS(string numeroDaOS);
         public Task<Evento> Load(string id, bool carregarAgenda);

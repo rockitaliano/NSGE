@@ -73,6 +73,11 @@ namespace NSGE.Services.DI
     {
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services)
         {
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("AllowAnyOrigin", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSingleton<IDapperContext, DapperContext>();
             services.AddScoped<IEventoService, EventoService>();
